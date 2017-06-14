@@ -15,10 +15,11 @@
     <result column="setuptime" property="setuptime" jdbcType="TIMESTAMP" />
     <result column="cratetime" property="cratetime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, companyname, companycode, companytypecode, area, parentid, legal, capital, industrycode, 
-    industryname, setuptime, cratetime, updatetime
+    industryname, setuptime, cratetime, updatetime, pinyin
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,12 +36,12 @@
       companytypecode, area, parentid, 
       legal, capital, industrycode, 
       industryname, setuptime, cratetime, 
-      updatetime)
+      updatetime, pinyin)
     values (#{id,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}, 
       #{companytypecode,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
       #{legal,jdbcType=VARCHAR}, #{capital,jdbcType=DECIMAL}, #{industrycode,jdbcType=VARCHAR}, 
       #{industryname,jdbcType=VARCHAR}, #{setuptime,jdbcType=TIMESTAMP}, #{cratetime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP})
+      #{updatetime,jdbcType=TIMESTAMP}, #{pinyin,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ljo.dto.Company" >
     insert into um_company
@@ -84,6 +85,9 @@
       <if test="updatetime != null" >
         updatetime,
       </if>
+      <if test="pinyin != null" >
+        pinyin,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -124,6 +128,9 @@
       </if>
       <if test="updatetime != null" >
         #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pinyin != null" >
+        #{pinyin,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +173,9 @@
       <if test="updatetime != null" >
         updatetime = #{updatetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="pinyin != null" >
+        pinyin = #{pinyin,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -183,6 +193,7 @@
       setuptime = #{setuptime,jdbcType=TIMESTAMP},
       cratetime = #{cratetime,jdbcType=TIMESTAMP},
       updatetime = #{updatetime,jdbcType=TIMESTAMP}
+      pinyin = #{pinyin,jdbcType=VARCHAR},
     where id = #{id,jdbcType=INTEGER}
   </update>
 
@@ -195,4 +206,16 @@
     </where>
     order by id asc
   </select>
+
+  <select id="findCompanyByCopm" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from um_company
+    where
+      companyname like #{0}
+      or companycode like #{0}
+      or pinyin like #{0}
+    order by id asc
+  </select>
 </mapper>
+

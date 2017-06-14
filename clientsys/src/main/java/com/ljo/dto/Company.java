@@ -30,6 +30,8 @@ public class Company {
 
     private Date updatetime;
 
+    private String pinyin;
+
     public Integer getId() {
         return id;
     }
@@ -132,5 +134,13 @@ public class Company {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getPinyin() {
+        return pinyin;
+    }
+
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
     }
 }

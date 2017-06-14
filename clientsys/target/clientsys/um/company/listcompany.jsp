@@ -8,6 +8,7 @@
         var countAll = ${page.total};
         $(function(){
             pageInit('${pageNo}');
+            comp.selectCompany("compinput", false);
         });
 
         function pageInit(pageNo) {
@@ -63,6 +64,8 @@
                     <tr>
                         <td>名称</td>
                         <td><input type="text" id="companyname" name="companyname"/> </td>
+                        <td>企业</td>
+                        <td><input type="text" id="compinput" name="compinput" style="widows: 120px"> </td>
                         <td><input type="button" value="查询" onclick="findCompany()"/> </td>
                     </tr>
                 </table>

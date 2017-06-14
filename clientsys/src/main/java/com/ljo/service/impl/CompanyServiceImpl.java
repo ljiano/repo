@@ -46,4 +46,8 @@ public class CompanyServiceImpl implements ICompanyService {
     public Company findCompanyById(int companyId) {
         return companyDao.selectByPrimaryKey(companyId);
     }
+
+    public List<Company> findCompanysByComp(String comp) {
+        return this.companyDao.findCompanyByCopm(comp);
+    }
 }

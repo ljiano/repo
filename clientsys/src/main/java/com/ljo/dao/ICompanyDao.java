@@ -19,4 +19,6 @@ public interface ICompanyDao {
     int updateByPrimaryKey(Company record);
 
     List<Company> findCompanys(Map<String, Object> param);
+
+    List<Company> findCompanyByCopm(String comp);
 }

@@ -22,10 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="clientsys" />
+        <module name="client-pro01" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="client-pro01" target="1.5" />
       <module name="clientsys" target="1.5" />
     </bytecodeTargetLevel>
   </component>

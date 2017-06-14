@@ -83,7 +83,7 @@ public class UserAction {
         param.put("username", "%" + username + "%");
         PageInfo<User> pageInfo = userService.findUsersByParam(param, pageNo, pageSize);
         if(pageInfo != null){
-
+            return JSONObject.fromObject(pageInfo).toString();
         }
         return "";
     }

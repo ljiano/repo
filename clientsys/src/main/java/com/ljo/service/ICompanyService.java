@@ -42,4 +42,7 @@ public interface ICompanyService {
      * @return
      */
     public Company findCompanyById(int companyId);
+
+
+    public List<Company> findCompanysByComp(String comp);
 }
