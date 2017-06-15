@@ -1,8 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/um/include/uminclude.jsp" %>
-<html>
+<html lang="en-us">
 <head>
     <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
     <script type="text/javascript">
         function closeWin() {
             window.close();
