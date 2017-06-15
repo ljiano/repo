@@ -45,36 +45,36 @@
                         <td>组织机构代码</td>
                         <td><input type="text" id="companycode" name="companycode"/></td>
                     </tr>
-                    <%--<tr>--%>
-                    <%--<td>企业性质</td>--%>
-                    <%--<td><input type="text" id="companytype" name="companytype"/> </td>--%>
-                    <%--<td>行业</td>--%>
-                    <%--<td><input type="text" id="industryname" name="industryname"/> </td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>地区</td>--%>
-                    <%--<td><input type="text" id="area" name="area"/> </td>--%>
-                    <%--<td>注册规模</td>--%>
-                    <%--<td><input type="text" id="gm" name="gm"/> </td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>法人</td>--%>
-                    <%--<td><input type="text" id="legal" name="legal"/> </td>--%>
-                    <%--<td>总资产</td>--%>
-                    <%--<td><input type="text" id="capital" name="capital"/> </td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>营业执照注册号</td>--%>
-                    <%--<td><input type="text" id="f1" name="f1"/> </td>--%>
-                    <%--<td>通讯地址</td>--%>
-                    <%--<td><input type="text" id="f2" name="f2"/> </td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                    <%--<td>年份</td>--%>
-                    <%--<td><input type="text" id="f3" name="f3"/> </td>--%>
-                    <%--<td>季度</td>--%>
-                    <%--<td><input type="text" id="f4" name="f4"/> </td>--%>
-                    <%--</tr>--%>
+                    <tr>
+                        <td>企业性质</td>
+                        <td><input type="text" id="companytype" name="companytype"/></td>
+                        <td>行业</td>
+                        <td><input type="text" id="industryname" name="industryname"/></td>
+                    </tr>
+                    <tr>
+                        <td>地区</td>
+                        <td><input type="text" id="area" name="area"/></td>
+                        <td>注册规模</td>
+                        <td><input type="text" id="gm" name="gm"/></td>
+                    </tr>
+                    <tr>
+                        <td>法人</td>
+                        <td><input type="text" id="legal" name="legal"/></td>
+                        <td>总资产</td>
+                        <td><input type="text" id="capital" name="capital"/></td>
+                    </tr>
+                    <tr>
+                        <td>营业执照注册号</td>
+                        <td><input type="text" id="f1" name="f1"/></td>
+                        <td>通讯地址</td>
+                        <td><input type="text" id="f2" name="f2"/></td>
+                    </tr>
+                    <tr>
+                        <td>年份</td>
+                        <td><input type="text" id="f3" name="f3"/></td>
+                        <td>季度</td>
+                        <td><input type="text" id="f4" name="f4"/></td>
+                    </tr>
                 </table>
                 <table>
                     <tr>

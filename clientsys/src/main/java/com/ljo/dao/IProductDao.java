@@ -2,6 +2,9 @@ package com.ljo.dao;
 
 import com.ljo.dto.Product;
 
+import java.util.List;
+import java.util.Map;
+
 public interface IProductDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +17,8 @@ public interface IProductDao {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    List<Product> findProducts(Map<String, Object> param);
+
+    List<Product> findProductByPm(String comp);
 }

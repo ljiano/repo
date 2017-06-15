@@ -103,4 +103,23 @@
       creditid = #{creditid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findProducts" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from um_product
+    <where>
+      <if test="name != null and name != ''"> name like #{name}</if>
+    </where>
+    order by id asc
+  </select>
+
+  <select id="findProductByPm" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from um_product
+    where
+    name like #{0}
+    order by id asc
+  </select>
 </mapper>

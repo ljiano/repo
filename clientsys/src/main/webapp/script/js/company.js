@@ -10,6 +10,7 @@ comp.selectCompany = function (select2_id, flag){
         allowClear: true,	//是否允许用户清除文本信息
         ajax: {
             url: '/company/comps',	//地址
+            contentType:"application/x-www-form-urlencoded;charset=UTF-8",
             delay: 250,
             dataType: 'json',	//接收的数据类型
             data: function (term, pageNo) {		//在查询时向服务器端传输的数据

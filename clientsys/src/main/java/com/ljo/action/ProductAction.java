@@ -1,9 +1,8 @@
 package com.ljo.action;
 
 import com.github.pagehelper.PageInfo;
-import com.ljo.dto.Company;
-import com.ljo.dto.User;
-import com.ljo.service.ICompanyService;
+import com.ljo.dto.Product;
+import com.ljo.service.IProductService;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -23,37 +22,37 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by jb.liang on 2017/4/10.
+ * Created by Administrator on 2017/6/14.
  */
 @Controller
-@RequestMapping("/company")
-public class CompanyAction {
+@RequestMapping("/product")
+public class ProductAction {
 
-    public static Log LOGGER = LogFactory.getLog(CompanyAction.class);
+    public static Log LOGGER = LogFactory.getLog(ProductAction.class);
 
     @Resource
-    public ICompanyService companyService;
+    public IProductService productService;
 
     @ResponseBody
-    @RequestMapping("/savecompany")
-    public String saveCompany(Company company) {
+    @RequestMapping("/saveproduct")
+    public String saveProduct(Product product) {
         try {
-            companyService.saveCompany(company);
+            productService.saveProduct(product);
             return "ok";
         } catch (Exception e){
-            LOGGER.error("保存企业失败！", e);
+            LOGGER.error("保存产品失败！", e);
             return "err";
         }
     }
 
-    @RequestMapping("/findcompanys")
-    public String findCompanys(Model model, @Param(value = "pageNo") Integer pageNo,
-                            @Param(value = "pageSize")Integer pageSize){
+    @RequestMapping("/findproducts")
+    public String findProducts(Model model, @Param(value = "pageNo") Integer pageNo,
+                               @Param(value = "pageSize")Integer pageSize){
         if(pageNo == null) pageNo = 1;
         if(pageSize == null) pageSize = 10;
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("companyname", "");
-        PageInfo<Company> pageInfo = companyService.findAllCompanysByUm(param, pageNo, pageSize);
+        param.put("name", "");
+        PageInfo<Product> pageInfo = productService.findAllProductsByUm(param, pageNo, pageSize);
         if(pageInfo != null){
             //List<User> list = pageInfo.getList();
             model.addAttribute("page", pageInfo);
@@ -61,18 +60,18 @@ public class CompanyAction {
             model.addAttribute("pageSize", pageSize);
         }
 
-        return "company/listcompany";
+        return "product/listproduct";
     }
 
     @ResponseBody
-    @RequestMapping("/findcompanystr")
-    public String findCompanyOfJSON(@Param("companyname") String companyname, @Param(value = "pageNo") Integer pageNo,
-                                 @Param(value = "pageSize")Integer pageSize){
+    @RequestMapping("/findproductstr")
+    public String findProductOfJSON(@Param("productname") String productname, @Param(value = "pageNo") Integer pageNo,
+                                    @Param(value = "pageSize")Integer pageSize){
         if(pageNo == null) pageNo = 1;
         if(pageSize == null) pageSize = 10;
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("companyname", "%" + companyname + "%");
-        PageInfo<Company> pageInfo = companyService.findAllCompanysByUm(param, pageNo, pageSize);
+        param.put("productname", "%" + productname + "%");
+        PageInfo<Product> pageInfo = productService.findAllProductsByUm(param, pageNo, pageSize);
         if(pageInfo != null){
             return JSONObject.fromObject(pageInfo).toString();
         }
@@ -81,24 +80,24 @@ public class CompanyAction {
 
     @ResponseBody
     @RequestMapping("/comps")
-    public List<Company> findCompanys2(@Param("compinput") String compinput) {
+    public List<Product> findProducts2(@Param("compinput") String compinput) {
         if(StringUtils.isNotBlank(compinput)){
             try {
                 compinput = new String(compinput.getBytes("ISO-8859-1"), "utf-8");
             } catch (UnsupportedEncodingException e) {
                 LOGGER.error("转码失败！", e);
             }
-            List<Company> list = this.companyService.findCompanysByComp("%" + compinput + "%");
+            List<Product> list = this.productService.findProductsByPm("%" + compinput + "%");
             if(CollectionUtils.isNotEmpty(list)){
                 return list;
             }
         }
-        return new ArrayList<Company>();
+        return new ArrayList<Product>();
     }
 
     @ResponseBody
     @RequestMapping("/comp")
-    public Company findCompany2(@Param("comp") String comp) {
+    public Product findProduct2(@Param("comp") String comp) {
         return null;
     }
 }
