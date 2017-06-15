@@ -41,8 +41,13 @@ comp.selectCompany = function (select2_id, flag){
         },
         formatSelection: function (obj) {
             $("#" + select2_id + "_hiddenname").remove();
-            $("#" + select2_id).after("<input type='hidden' id='" + select2_id + "_hiddenname' value='" + obj.id + "' />");
+            $("#" + select2_id).after("<input type='hidden' id='" + select2_id + "_hiddenname'" +
+            " name='"+select2_id+"_hiddenname' value='" + obj.id + "' />");
             return obj.companyname + "(" + obj.companycode + ")";
+        },
+        clear: function(obj){
+            alert(123);
+            $("#" + select2_id + "_hiddenname").val("");
         }
     });
     return true;
