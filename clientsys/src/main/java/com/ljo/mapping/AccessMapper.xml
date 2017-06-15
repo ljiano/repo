@@ -174,4 +174,18 @@
       contractid = #{contractid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="findAccesses" parameterType="java.util.Map" resultType="java.util.Map">
+      select
+        a.*,
+        u.username,
+        cp.companyname
+      from um_access a
+      left join um_user u on a.userid=u.id
+      left join um_company cp on a.companyid = cp.id
+    <where>
+      <if test="username != null and username != ''"> u.username like #{username, jdbcType=VARCHAR}</if>
+      <if test="cid != null and cid != ''"> cp.id = #{cid, jdbcType=INTEGER}</if>
+    </where>
+  </select>
 </mapper>
