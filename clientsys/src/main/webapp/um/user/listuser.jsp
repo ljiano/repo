@@ -5,9 +5,10 @@
     <title></title>
     <script type="text/javascript">
         var pageSize = 10;
-        var countAll = ${page.total};
+        var countAll = null;
         $(function(){
-            pageInit('${pageNo}');
+            //pageInit('${pageNo}');
+            queryUser(1);
         });
 
         function pageInit(pageNo) {
@@ -24,7 +25,7 @@
                 success:function(result){
                     if(result != null && result != ''){
                         var total = result.total;
-                        if(Number(countAll) != Number(total)) {
+                        if(countAll == null || Number(countAll) != Number(total)) {
                             countAll = total;
                             pageInit(pageNo);
                         }

@@ -5,27 +5,28 @@
     <title></title>
     <script type="text/javascript">
         var pageSize = 10;
-        var countAll = ${page.total};
+        var countAll = null;
         $(function(){
-            pageInit('${pageNo}');
-            comp.selectCompany("compinput", false);
+            //pageInit('${pageNo}');
+            //comp.selectproduct("compinput", false);
+            queryproduct(1);
         });
 
         function pageInit(pageNo) {
-            $("#page").initPage(countAll, pageNo, queryCompany);
+            $("#page").initPage(countAll, pageNo, queryproduct);
         }
 
-        function queryCompany(pageNo){
-            var companyname = $("#companyname").val();
+        function queryproduct(pageNo){
+            var name = $("#name").val();
             $.ajax({
-                url: '/company/findcompanystr',
+                url: '/product/findproductstr',
                 type:'post',
-                data:{'companyname': companyname, 'pageNo': pageNo, 'pageSize': pageSize},
+                data:{'name': name, 'pageNo': pageNo, 'pageSize': pageSize},
                 dataType:'json',
                 success:function(result){
                     if(result != null && result != ''){
                         var total = result.total;
-                        if(Number(countAll) != Number(total)) {
+                        if(countAll == null || Number(countAll) != Number(total)) {
                             countAll = total;
                             pageInit(pageNo);
                         }
@@ -34,10 +35,10 @@
                         for(var i = 0; i < data.length; i++){
                             html += "<tr>";
                             html += "<td>"+data[i].id+"</td>";
-                            html += "<td>"+data[i].companyname+"</td>";
+                            html += "<td>"+data[i].name+"</td>";
                             html += "</tr>";
                         }
-                        $("#companybody").html(html);
+                        $("#productbody").html(html);
                     } else {
                         alert("查询失败！");
                     }
@@ -45,8 +46,8 @@
             });
         }
 
-        function findCompany(){
-            queryCompany(1);
+        function findproduct(){
+            queryproduct(1);
         }
     </script>
 </head>
@@ -58,15 +59,13 @@
         </div>
 
         <div class="col-lg-9" style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;height: 800px">
-            <a href="${contextPath}/um/company/editcompany.jsp">新增</a>
+            <a href="${contextPath}/um/product/editproduct.jsp">新增</a>
             <div>
                 <table>
                     <tr>
                         <td>名称</td>
-                        <td><input type="text" id="companyname" name="companyname"/> </td>
-                        <td>企业</td>
-                        <td><input type="text" id="compinput" name="compinput" style="widows: 120px"> </td>
-                        <td><input type="button" value="查询" onclick="findCompany()"/> </td>
+                        <td><input type="text" id="name" name="name"/> </td>
+                        <td><input type="button" value="查询" onclick="findproduct()"/> </td>
                     </tr>
                 </table>
             </div>
@@ -75,16 +74,10 @@
                 <thead>
                 <tr>
                     <th>序号</th>
-                    <th>企业名称</th>
+                    <th>产品名称</th>
                 </tr>
                 </thead>
-                <tbody id="companybody">
-                <c:forEach items="${page.list}" var="company">
-                    <tr>
-                        <td>${company.id}</td>
-                        <td>${company.companyname}</td>
-                    </tr>
-                </c:forEach>
+                <tbody id="productbody">
                 </tbody>
             </table>
             <%--maxshowpageitem ：最多显示的页码数字，必需; pagelistcount : 每一个页面显示的数据的个数--%>

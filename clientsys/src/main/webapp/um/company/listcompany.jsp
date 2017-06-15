@@ -5,10 +5,11 @@
     <title></title>
     <script type="text/javascript">
         var pageSize = 10;
-        var countAll = ${page.total};
+        var countAll = null;
         $(function(){
-            pageInit('${pageNo}');
+            //pageInit('${pageNo}');
             comp.selectCompany("compinput", false);
+            queryCompany(1);
         });
 
         function pageInit(pageNo) {
@@ -25,7 +26,7 @@
                 success:function(result){
                     if(result != null && result != ''){
                         var total = result.total;
-                        if(Number(countAll) != Number(total)) {
+                        if(countAll == null || Number(countAll) != Number(total)) {
                             countAll = total;
                             pageInit(pageNo);
                         }
@@ -35,6 +36,10 @@
                             html += "<tr>";
                             html += "<td>"+data[i].id+"</td>";
                             html += "<td>"+data[i].companyname+"</td>";
+                            html += "<td>" +
+                            "<a href='javascript:viewComp("+data[i].id+")'>查看</a>&nbsp;|" +
+                            "&nbsp;<a href='javascript:editComp("+data[i].id+")'>编辑</a>" +
+                            "</td>";
                             html += "</tr>";
                         }
                         $("#companybody").html(html);
@@ -47,6 +52,13 @@
 
         function findCompany(){
             queryCompany(1);
+        }
+
+        function viewComp(id){
+
+        }
+        function editComp(id){
+            window.location.href = "/company/loadcompany?cid=" + id;
         }
     </script>
 </head>
@@ -76,15 +88,10 @@
                 <tr>
                     <th>序号</th>
                     <th>企业名称</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody id="companybody">
-                <c:forEach items="${page.list}" var="company">
-                    <tr>
-                        <td>${company.id}</td>
-                        <td>${company.companyname}</td>
-                    </tr>
-                </c:forEach>
                 </tbody>
             </table>
             <%--maxshowpageitem ：最多显示的页码数字，必需; pagelistcount : 每一个页面显示的数据的个数--%>

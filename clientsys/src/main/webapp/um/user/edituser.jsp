@@ -14,7 +14,7 @@
                 },
                 success: function(data) {
                     if(data == 'ok'){
-                        window.location.href = "/user/findusers";
+                        window.location.href = "/um/user/listuser.jsp";
                     } else{
                         alert("err");
                     }

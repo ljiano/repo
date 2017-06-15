@@ -17,7 +17,7 @@
                 },
                 success: function (data) {
                     if (data == 'ok') {
-                        window.location.href = "/company/findcompanys";
+                        window.location.href = "/um/company/listcompany.jsp";
                     } else {
                         alert("err");
                     }
@@ -38,10 +38,11 @@
 
         <div class="col-lg-9" style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;height: 800px">
             <form id="comForm" method="post">
+                <input type="hidden" id="id" name="id" value="${param.cid}"/>
                 <table>
                     <tr>
                         <td>企业名称</td>
-                        <td><input type="text" id="companyname" name="companyname"/></td>
+                        <td><input type="text" id="companyname" name="companyname" value="${company.companyname}"/></td>
                         <td>组织机构代码</td>
                         <td><input type="text" id="companycode" name="companycode"/></td>
                     </tr>

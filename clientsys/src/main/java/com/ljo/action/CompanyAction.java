@@ -38,7 +38,11 @@ public class CompanyAction {
     @RequestMapping("/savecompany")
     public String saveCompany(Company company) {
         try {
-            companyService.saveCompany(company);
+            if(company.getId() != null && company.getId().intValue() > 0){
+                companyService.editCompany(company);
+            } else {
+                companyService.saveCompany(company);
+            }
             return "ok";
         } catch (Exception e){
             LOGGER.error("保存企业失败！", e);
@@ -100,5 +104,14 @@ public class CompanyAction {
     @RequestMapping("/comp")
     public Company findCompany2(@Param("comp") String comp) {
         return null;
+    }
+
+    @RequestMapping("/loadcompany")
+    public String loadCompany(Model model, @Param("cid") Integer cid) {
+        Company company = this.companyService.findCompanyById(cid);
+        if(company != null){
+            model.addAttribute("company", company);
+        }
+        return "company/editcompany";
     }
 }

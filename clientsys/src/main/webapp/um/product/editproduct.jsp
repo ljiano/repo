@@ -17,7 +17,7 @@
                 },
                 success: function (data) {
                     if (data == 'ok') {
-                        window.location.href = "/product/findproducts";
+                        window.location.href = "/um/product/listproduct.jsp";
                     } else {
                         alert("err");
                     }

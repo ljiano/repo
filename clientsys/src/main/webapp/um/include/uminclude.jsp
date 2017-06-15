@@ -14,7 +14,7 @@
                             <%--class="active"--%>
                             <li><a href="${contextPath}/user/findusers">用户</a></li>
                             <li><a href="${contextPath}/company/findcompanys">客户</a></li>
-                            <li><a href="#">产品</a></li>
+                            <li><a href="${contextPath}/um/product/listproduct.jsp">产品</a></li>
                             <li><a href="${contextPath}/um/access/listaccess.jsp">出行</a></li>
                             <%--<li class="dropdown">--%>
                             <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>

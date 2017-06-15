@@ -36,7 +36,7 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     public void editCompany(Company company) {
-
+        this.companyDao.updateByPrimaryKeySelective(company);
     }
 
     public void removeCompany(Company company) {

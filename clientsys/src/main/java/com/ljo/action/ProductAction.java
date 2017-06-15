@@ -65,12 +65,12 @@ public class ProductAction {
 
     @ResponseBody
     @RequestMapping("/findproductstr")
-    public String findProductOfJSON(@Param("productname") String productname, @Param(value = "pageNo") Integer pageNo,
+    public String findProductOfJSON(@Param("name") String name, @Param(value = "pageNo") Integer pageNo,
                                     @Param(value = "pageSize")Integer pageSize){
         if(pageNo == null) pageNo = 1;
         if(pageSize == null) pageSize = 10;
         Map<String, Object> param = new HashMap<String, Object>();
-        param.put("productname", "%" + productname + "%");
+        param.put("name", "%" + name + "%");
         PageInfo<Product> pageInfo = productService.findAllProductsByUm(param, pageNo, pageSize);
         if(pageInfo != null){
             return JSONObject.fromObject(pageInfo).toString();
