@@ -91,12 +91,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <%--<a href="${contextPath}/um/company/editcompany.jsp">新增</a>--%>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="btn-toolbar" role="toolbar">
@@ -104,7 +98,7 @@
                             <button type="button" class="btn btn-default" onclick="addComp();">新增</button>
                         </div>
                     </div>
-                    <table class="table table-striped table-bordered table-hover">
+                    <table class="table table-striped table-hover">
                         <%--<caption style="padding-left: 2px" onclick="addComp();">新增</caption>--%>
                         <thead>
                         <tr>
