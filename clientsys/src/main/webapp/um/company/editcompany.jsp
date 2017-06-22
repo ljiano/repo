@@ -4,11 +4,22 @@
 <head>
     <title></title>
     <script type="text/javascript">
-        var contsize = 1;
+        var contsize = '${contsize}';
         function closeWin() {
             window.close();
         }
         function saveCompany() {
+            var contacts = [];
+            var contacttr = $("#contacttable").find("tr:gt(0)");
+            if(contacttr.length > 0){
+                for(var i = 0; i < contacttr.length; i++) {
+                    var contact = $(contacttr[i]).find("td:eq(9)").text();
+                    if(contact != null && contact != ""){
+                        contacts.push($.parseJSON(contact));
+                    }
+                }
+            }
+            $("#contacts").val(JSON.stringify(contacts));
             $("#comForm").ajaxSubmit({
                 url: '/company/savecompany',
                 type: 'post',
@@ -67,6 +78,7 @@
                 "<a href='javascript:removeContact(" + contsize + ")'>删除</a>&nbsp;" +
                 "</td>";
                 contacthtml += "<td style='display: none'>" + cont.contactid + "</td>";
+                contacthtml += "<td style='display: none'>" + JSON.stringify(cont) + "</td>";
                 contacthtml += "</tr>";
                 $("#contactbody").append(contacthtml);
                 contsize++;
@@ -79,6 +91,7 @@
                 $($("#cont_" + index).find("td")[5]).text(cont.contactemail);
                 $($("#cont_" + index).find("td")[6]).text(cont.iscore == 1 ? "是" : "否");
                 $($("#cont_" + index).find("td")[8]).text(cont.contactid);
+                $($("#cont_" + index).find("td")[9]).text(JSON.stringify(cont));
             }
             $("#conWin").modal('hide');
         }
@@ -133,7 +146,7 @@
     <%--</div>--%>
 
     <div style="box-shadow: inset 1px -1px 1px #bce8f1, inset -1px 1px 1px #bce8f1;height: 800px">
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="panel-title">
                     企业基本信息
@@ -229,7 +242,7 @@
             </div>
         </div>
 
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="panel-title">
                     联系人信息
@@ -241,7 +254,7 @@
                         <button type="button" class="btn btn-default" onclick="addContact();">新增</button>
                     </div>
                 </div>
-                <table class="table table-condensed table-hover">
+                <table class="table table-condensed table-hover" id="contacttable">
                     <thead>
                     <tr>
                         <th style="font-size: 14px; font-family: Arial">联系人姓名</th>
@@ -253,13 +266,37 @@
                         <th style="font-size: 14px; font-family: Arial">职位</th>
                         <th style="font-size: 14px; font-family: Arial">操作</th>
                         <th style="display: none"></th>
+                        <th style="display: none"></th>
                     </tr>
                     </thead>
                     <tbody id="contactbody">
-
+                        <c:forEach items="contlist" var="cont" varStatus="step">
+                            <tr id="cont_${step.index}">
+                                <td>${cont.contactname}</td>
+                                <td>${cont.contactposition}</td>
+                                <td>${cont.contacttel}</td>
+                                <td>${cont.contactphone}</td>
+                                <td>${cont.contactno}</td>
+                                <td>${cont.contactemail}</td>
+                                <td>${cont.iscore == 1 ? "是" : cont.iscore == 2 ? "否" : ""}</td>
+                                <td>
+                                    <a href="javascript:editContact('${step.index}')">编辑</a>&nbsp;
+                                    <a href="javascript:removeContact('${step.index}')">删除</a>&nbsp;
+                                </td>
+                                <td style='display: none'>${cont.contactid}</td>
+                                <td style='display: none'>${cont.contstr}</td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div>
+            <p style="margin-left: 80px">
+                <button type="button" class="btn btn-primary btn-lg" onclick="saveCompany();">提交</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary btn-lg">关闭</button>
+            </p>
         </div>
     </div>
     <%--</div>--%>
@@ -269,7 +306,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="myModalLabel" contenteditable="true">新增联系人</h4>
+                    <h4 class="modal-title" id="myModalLabel" contenteditable="false">新增联系人</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="contForm" method="post" role="form">

@@ -31,7 +31,7 @@
     delete from um_company
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ljo.dto.Company" >
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.ljo.dto.Company" >
     insert into um_company (id, companyname, companycode, 
       companytypecode, area, parentid, 
       legal, capital, industrycode, 
