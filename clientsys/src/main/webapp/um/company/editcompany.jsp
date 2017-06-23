@@ -98,24 +98,24 @@
 
         function editContact(index) {
             $("#contForm").resetForm();
-            $("#iscore1").removeAttr("checked");
-            $("#iscore2").removeAttr("checked");
+            $("#iscore1").removeProp("checked");
+            $("#iscore2").removeProp("checked");
             $("#tr_index").val(index);
             var td = $("#cont_" + index).find("td");
-            if(td.length > 7){
-                $("#contactname").val($(td[0]).text());
-                $("#contactposition").val($(td[1]).text());
-                $("#contacttel").val($(td[2]).text());
-                $("#contactphone").val($(td[3]).text());
-                $("#contactno").val($(td[4]).text());
-                $("#contactemail").val($(td[5]).text());
-                var iscore = $(td[6]).text() == "是" ? 1 : $(td[6]).text() == "否" ? 2 : 0;
-                if(iscore == 1) {
-                    $("#iscore1").prop('checked', 'checked')
-                } else if(iscore == 2){
-                    $("#iscore2").prop('checked', 'checked')
+            if(td.length > 9){
+                var cont = $.parseJSON($.trim($($(td[9])).text()));
+                $("#contactname").val(cont.contactname);
+                $("#contactposition").val(cont.contactposition);
+                $("#contacttel").val(cont.contacttel);
+                $("#contactphone").val(cont.contactphone);
+                $("#contactno").val(cont.contactno);
+                $("#contactemail").val(cont.contactemail);
+                if(cont.iscore == 1) {
+                    $("#iscore1").prop('checked', 'checked');
+                } else if(cont.iscore == 2){
+                    $("#iscore2").prop('checked', 'checked');
                 }
-                $("#contactid").val($(td[8]).text());
+                $("#contactid").val(cont.contactid);
             }
             $("#conWin").modal({
                 backdrop: false,
@@ -124,9 +124,8 @@
         }
 
         function removeContact(index){
-            $("#cont_" + index).remove();
             var td = $("#cont_" + index).find("td");
-            var contactid = $(td[8]).text();
+            var contactid = $.trim($(td[8]).text());
             if(contactid > 0){
                 var delIds = $("#deletecontactids").val();
                 if(delIds.length > 0){
@@ -135,6 +134,7 @@
                 delIds += contactid;
                 $("#deletecontactids").val(delIds);
             }
+            $("#cont_" + index).remove();
         }
     </script>
 </head>
@@ -169,7 +169,8 @@
                         <label class="col-sm-2 control-label" for="companycode">组织机构代码</label>
 
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="companycode" name="companycode"/>
+                            <input class="form-control" type="text" id="companycode" name="companycode"
+                                    value="${company.companycode}"/>
                         </div>
                     </div>
 
@@ -270,21 +271,21 @@
                     </tr>
                     </thead>
                     <tbody id="contactbody">
-                        <c:forEach items="contlist" var="cont" varStatus="step">
-                            <tr id="cont_${step.index}">
-                                <td>${cont.contactname}</td>
-                                <td>${cont.contactposition}</td>
-                                <td>${cont.contacttel}</td>
-                                <td>${cont.contactphone}</td>
-                                <td>${cont.contactno}</td>
-                                <td>${cont.contactemail}</td>
-                                <td>${cont.iscore == 1 ? "是" : cont.iscore == 2 ? "否" : ""}</td>
+                        <c:forEach items="${contlist}" var="cont" varStatus="step">
+                            <tr id="cont_${step.count}">
+                                <td> ${cont.contactname} </td>
+                                <td> ${cont.contactposition} </td>
+                                <td> ${cont.contacttel} </td>
+                                <td> ${cont.contactphone} </td>
+                                <td> ${cont.contactno} </td>
+                                <td> ${cont.contactemail} </td>
+                                <td> ${cont.iscore == 1 ? "是" : cont.iscore == 2 ? "否" : ""} </td>
                                 <td>
-                                    <a href="javascript:editContact('${step.index}')">编辑</a>&nbsp;
-                                    <a href="javascript:removeContact('${step.index}')">删除</a>&nbsp;
+                                    <a href="javascript:editContact('${step.count}')">编辑</a>&nbsp;
+                                    <a href="javascript:removeContact('${step.count}')">删除</a>&nbsp;
                                 </td>
-                                <td style='display: none'>${cont.contactid}</td>
-                                <td style='display: none'>${cont.contstr}</td>
+                                <td style='display: none'> ${cont.contactid} </td>
+                                <td style='display: none'> ${cont.contstr} </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -310,7 +311,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal" id="contForm" method="post" role="form">
-                        <input type="hidden" id="tr_index" name="tr_index" value="0">
+                        <input type="hidden" id="tr_index" name="tr_index" value="">
                         <input type="hidden" id="contactid" name="contactid" value="0">
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="contactname">联系人姓名</label>

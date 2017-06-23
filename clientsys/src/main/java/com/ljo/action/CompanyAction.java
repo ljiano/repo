@@ -176,18 +176,19 @@ public class CompanyAction {
     }
 
     @RequestMapping("/loadcompany")
-    public String loadCompany(Model model, @Param("cid") Integer cid) {
+    public String loadCompany(HttpServletRequest request, @Param("cid") Integer cid) {
         Company company = this.companyService.findCompanyById(cid);
         if(company != null){
-            model.addAttribute("company", company);
+            request.setAttribute("company", company);
             List<Map> list = contactService.findContactByComId(cid);
             if(CollectionUtils.isNotEmpty(list)){
                 for(Map m : list){
+                    m.put("contactid", m.get("id"));
                     m.put("contstr", JSONObject.fromObject(m).toString());
                 }
             }
-            model.addAttribute("contlist", list == null ? new ArrayList<Map>() : list);
-            model.addAttribute("contsize", list == null ? 0 : list.size());
+            request.setAttribute("contlist", list == null ? new ArrayList<Map>() : list);
+            request.setAttribute("contsize", list == null ? 0 : list.size());
         }
         return "company/editcompany";
     }
