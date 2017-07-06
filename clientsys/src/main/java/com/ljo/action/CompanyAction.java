@@ -47,7 +47,8 @@ public class CompanyAction {
             String companycode = StringUtil.safeToString(request.getParameter("companycode"), null);
             String companytype = StringUtil.safeToString(request.getParameter("companytype"), null);
             String industryname = StringUtil.safeToString(request.getParameter("industryname"), null);
-            String area = StringUtil.safeToString(request.getParameter("area"), null);
+            String province = StringUtil.safeToString(request.getParameter("area_province"), null);
+            String city = StringUtil.safeToString(request.getParameter("area_city"), null);
             String gm = StringUtil.safeToString(request.getParameter("gm"), null);
             String legal = StringUtil.safeToString(request.getParameter("legal"), null);
             String f1 = StringUtil.safeToString(request.getParameter("f1"), null);
@@ -61,6 +62,10 @@ public class CompanyAction {
                 company = new Company();
                 company.setCratetime(new Date());
             }
+            if(StringUtils.isNotBlank(province) && StringUtils.isNotBlank(city)){
+                province += "," + city;
+            }
+            company.setArea(province);
             company.setCompanyname(companyname);
             company.setCompanycode(companycode);
             company.setUpdatetime(new Date());

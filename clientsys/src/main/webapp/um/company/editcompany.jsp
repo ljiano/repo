@@ -4,9 +4,29 @@
 <head>
     <title></title>
     <script type="text/javascript">
+        $(function(){
+            $('#area').distpicker();
+            <c:if test="${not empty company}">
+                var area = '${company.area}';
+                if(typeof(area) != 'undefined' && area != '' && area != null){
+                    var areas = area.split(",");
+                    var province = areas[0];
+                    $("#area_province").val(province);
+                    $("#area_province").trigger("change");
+                    var city = '';
+                    if(areas.length > 1){
+                        city = areas[1];
+                        $("#area_city").val(city);
+                    }
+                }
+            </c:if>
+        });
         var contsize = '${contsize}';
         function closeWin() {
             window.close();
+        }
+        function saveCompanytest() {
+            $("#area_city").val();
         }
         function saveCompany() {
             var contacts = [];
@@ -191,7 +211,14 @@
                         <label class="col-sm-2 control-label" for="area">地区</label>
 
                         <div class="col-sm-3">
-                            <input class="form-control" type="text" id="area" name="area">
+                            <%--<input class="form-control" type="text" id="area" name="area">--%>
+                                <div id="area">
+                                    <select data-province="--选择省--" style="width:125px;height:34px"
+                                            id="area_province" name="area_province"></select>
+                                    <select data-city="--选择市--" style="width:125px;height:34px"
+                                            id="area_city" name="area_city"></select>
+                                    <%--<select data-district="--选择区--"></select>--%>
+                                </div>
                         </div>
                         <label class="col-sm-2 control-label" for="gm">注册规模</label>
 

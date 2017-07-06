@@ -26,6 +26,13 @@
 <script type="text/javascript" src="${contextPath}/script/bootstrap/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="${contextPath}/script/js/company.js"></script>
 
+<%--<link href="${contextPath}/script/distpicker/css/htmleaf-demo.css" rel="stylesheet"/>--%>
+<%--<link href="${contextPath}/script/distpicker/css/main.css" rel="stylesheet"/>--%>
+<link href="${contextPath}/script/distpicker/css/normalize.css" rel="stylesheet"/>
+<script type="text/javascript" src="${contextPath}/script/distpicker/js/distpicker.data.js"></script>
+<script type="text/javascript" src="${contextPath}/script/distpicker/js/distpicker.js"></script>
+
+<%--<script type="text/javascript" src="${contextPath}/script/distpicker/js/main.js"></script>--%>
 
 <!-- width 属性控制设备的宽度。假设您的网站将被带有不同屏幕分辨率的设备浏览，那么将它设置为 device-width 可以确保它能正确呈现在不同设备上。
 initial-scale=1.0 确保网页加载时，以 1:1 的比例呈现，不会有任何的缩放。-->

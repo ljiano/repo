@@ -54,11 +54,11 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-lg-3" style="box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;height: 800px">
-            <jsp:include page="/um/include/left.jsp"/>
-        </div>
+        <%--<div class="col-lg-3" style="box-shadow:inset 1px -1px 1px #444, inset -1px 1px 1px #444;height: 800px">--%>
+            <%--<jsp:include page="/um/include/left.jsp"/>--%>
+        <%--</div>--%>
 
-        <div class="col-lg-9" style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;height: 800px">
+        <div class="col-lg-12" style="box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;height: 800px">
             <a href="${contextPath}/um/product/editproduct.jsp">新增</a>
             <div>
                 <table>
